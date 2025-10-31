@@ -1,0 +1,73 @@
+/* Grid layout for the app: header, sidebar, main content, footer */
+:root {
+  --sidebar-width: 240px;
+  --header-height: 64px; /* default AppBar height */
+  --gap: 16px;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr auto;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  gap: var(--gap);
+  min-height: 100vh;
+}
+
+.app-header {
+  grid-area: header;
+}
+
+.app-sidebar {
+  grid-area: sidebar;
+  /* ensure the sidebar sits flush with the header */
+}
+
+.app-main {
+  grid-area: main;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.app-footer {
+  grid-area: footer;
+}
+
+/* Make the header and footer full width and keep them above other content */
+.app-header > * {
+  width: 100%;
+}
+
+.app-footer > * {
+  width: 100%;
+}
+
+/* Responsive: collapse sidebar under 900px */
+@media (max-width: 900px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 1fr auto;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+  }
+
+  /* hide the permanent sidebar on small screens; keep it available if you implement a temporary drawer */
+  .app-sidebar {
+    display: none;
+  }
+
+  .app-main {
+    padding: 0.75rem;
+  }
+}
+
+/* Small accessibility touch: visible focus outlines for keyboard users on interactive parts inside the layout */
+.app-grid :focus {
+  outline: 3px solid rgba(100,108,255,0.35);
+  outline-offset: 2px;
+}

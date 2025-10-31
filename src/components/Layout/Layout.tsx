@@ -1,19 +1,28 @@
-import { Box } from '@mui/material';
+import './layout.css';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 
-const Layout = ({ children }: { children: React.ReactNode }) => (
-  <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-    <Header />
-    <Box sx={{ display: 'flex', flex: 1 }}>
-      <Sidebar />
-      <Box component="main" sx={{ flex: 1, p: 3 }}>
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="app-grid">
+      <header className="app-header">
+        <Header />
+      </header>
+
+      <nav className="app-sidebar" aria-label="Primary navigation">
+        <Sidebar />
+      </nav>
+
+      <main className="app-main" role="main">
         {children}
-      </Box>
-    </Box>
-    <Footer />
-  </Box>
-);
+      </main>
+
+      <footer className="app-footer">
+        <Footer />
+      </footer>
+    </div>
+  );
+};
 
 export default Layout;
