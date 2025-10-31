@@ -1,16 +1,15 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-
 import Layout from './components/Layout/Layout'
-import Home from './pages/Home';
+import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
+import type { PageKey } from './types/navigation'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [page, setPage] = useState<PageKey>('home')
 
   return (
-    <Layout>
-      <Home />
+    <Layout onNavigate={setPage} activePage={page}>
+      {page === 'home' ? <Home /> : <Dashboard />}
     </Layout>
   )
 }
